@@ -1,3 +1,4 @@
+//Runtime: 3 ms
 class Solution {
 public:
     bool isValid(string s) {
