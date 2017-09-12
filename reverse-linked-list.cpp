@@ -41,7 +41,32 @@ public:
     }
 };
 
+// ******************************************************************************
+//My recursive solution
+//Runtime: 9 ms
+class Solution {
+public:
 
+    ListNode* solve(ListNode* head,ListNode* temp)
+    {
+        if(head == NULL)
+            return temp;
+
+
+        ListNode* next = head->next;
+        head->next = temp;
+        temp = head;
+
+        return solve(next,temp);
+    }
+
+    ListNode* reverseList(ListNode* head) {
+
+        return solve(head, NULL);
+    }
+};
+
+// ******************************************************************************
 //Clean solution
 //Runtime: 6 ms
 class Solution {
