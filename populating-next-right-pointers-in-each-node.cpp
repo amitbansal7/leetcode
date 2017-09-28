@@ -1,3 +1,4 @@
+//My solution
 //Runtime: 26 ms
 class Solution {
 public:
@@ -56,5 +57,31 @@ public:
     void connect(TreeLinkNode *root) {
     	stack<TreeLinkNode*> S;
         solve(root, S);
+    }
+};
+
+//Simpler solution (learned from discuss section)
+//Runtime: 26 ms
+class Solution {
+public:
+    void connect(TreeLinkNode *root) {
+        if(!root)
+            return;
+        TreeLinkNode* prev = root;
+        TreeLinkNode* cur = NULL;
+
+        while(prev->left)
+        {
+            cur = prev;
+            while(cur)
+            {
+                cur->left->next = cur->right;
+                if(cur->next)
+                    cur->right->next = cur->next->left;
+
+                cur = cur->next;
+            }
+            prev = prev->left;
+        }
     }
 };
