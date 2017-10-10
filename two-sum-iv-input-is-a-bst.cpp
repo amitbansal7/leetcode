@@ -1,16 +1,19 @@
-//Runtime: 36 ms
+//Runtime: 32 ms
 class Solution {
 public:
     TreeNode* temp;
-    bool find(TreeNode* root, int f)
+    void find(TreeNode* root, int f)
     {
         if(!root)
-            return 0;
+            return;
 
         if(root->val == f)
             temp = root;
 
-        return find(root->left, f) | find(root->right, f);
+        if(f < root->val)
+            find(root->left, f);
+        else
+            find(root->right, f);
     }
 
     bool ans = 0;
