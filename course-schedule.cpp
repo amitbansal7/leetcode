@@ -39,10 +39,7 @@ public:
             if(!visited[i])
                 DFS(i, visited, greyset, adj);
 
-        if(f)
-            return 1;
-
-        return 0;
+        return f;
 
     }
 };
