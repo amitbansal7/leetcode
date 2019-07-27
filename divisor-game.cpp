@@ -1,0 +1,18 @@
+// Runtime: 4 ms
+// Memory Usage: 8.2 MB
+class Solution {
+public:
+  bool divisorGame(int N) {
+    vector<bool> dp(N + 1, false);
+
+    for (int i = 2; i <= N; i++) {
+      for (int j = 1; j * j <= i; j++) {
+        if (i % j == 0 && !dp[i - j]) {
+          dp[i] = true;
+          break;
+        }
+      }
+    }
+    return dp[N];
+  }
+};
