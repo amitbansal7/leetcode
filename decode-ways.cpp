@@ -1,43 +1,40 @@
-//Runtime: 3 ms
+// Runtime: 0 ms
+// Memory Usage: 16.9 MB
 class Solution {
 public:
 
-    bool valid(char c) { return c!='0'; }
-    bool valid(char a,char b) { return a == '1' || (a=='2' && b<='6'); }
+  bool valid(char c) {
+    return c != '0';
+  }
+  bool valid(char a, char b) {
+    return a  == '1' || (a == '2' && b <= '6');
+  }
 
-    int solve(string s,int i,int DP[])
-    {
-        if(i<=1)
-            return 1;
-
-        if(DP[i] != -1)
-            return DP[i];
-
-        char f = s[i-1];
-        char l = s[i-2];
-
-        int a =0;
-        if(valid(f))
-            a = solve(s,i-1,DP);
-
-        if(valid(l,f))
-            a += solve(s,i-2,DP);
-
-        return DP[i] = a;
+  int solve(string s, int i, vector<int> &dp) {
+    if (i == s.size()) {
+      return 1;
     }
-    int numDecodings(string s) {
+    if (dp[i] != -1)
+      return dp[i];
 
-        int l = s.size();
-        if(l==0 || s[0] == '0')
-            return 0;
-        if(l==1)
-            return l;
+    int res = 0;
+    if (valid(s[i]))
+      res = solve(s, i + 1, dp);
 
-
-        int DP[l+1];
-        for(int i=0;i<=l;i++)
-            DP[i] = -1;
-
-        return solve(s, l,DP);
+    if (i + 1 < s.size() && valid(s[i], s[i + 1])) {
+      res += solve(s, i + 2, dp);
     }
+
+    return dp[i] = res;
+  }
+
+  int numDecodings(string s) {
+    if (s.size() == 0 || s[0] == '0') {
+      return 0;
+    }
+
+    vector<int> dp(s.size() + 1, -1);
+
+    return solve(s, 0, dp);
+  }
 };
