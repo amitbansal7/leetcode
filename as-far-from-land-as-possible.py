@@ -1,3 +1,5 @@
+# Runtime: 652 ms
+# Memory Usage: 14.3 MB
 from collections import deque
 
 
